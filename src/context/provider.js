@@ -1,11 +1,20 @@
-import React, { createContext, useState } from "react";
-import dataPizzas from "./data/pizzas.json";
+import React, { createContext, useState, useEffect } from "react";
 
 const DataContext = createContext();
 
 const ContextProvider = ({ children }) => {
-  const [pizzas, setPizzas] = useState(dataPizzas);
+  const [pizzas, setPizzas] = useState([]);
   const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    const dataPizza = async () => {
+      const response = await fetch("/pizzas.json");
+      const data = await response.json();
+      setPizzas(data);
+    };
+
+    dataPizza();
+  }, []);
 
   const valueContextProvider = {
     pizzas,

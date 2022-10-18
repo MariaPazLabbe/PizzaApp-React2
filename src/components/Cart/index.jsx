@@ -2,8 +2,8 @@ import { Grid, List } from "@mui/material";
 import { useContext } from "react";
 import { Container } from "react-bootstrap";
 import { DataContext } from "../../context/provider";
-import CardPizza from "../utils/Card";
-import ListUnitPizza from "./ListUnitPizza";
+// import CardPizza from "../utils/Card";
+import ListUnitPizza from "../Cart/ListUnitPizza";
 
 const Cart = () => {
   const { cart } = useContext(DataContext);
@@ -20,10 +20,10 @@ const Cart = () => {
       ))}
 
       <div>
-        <h1>
-          Total:{" "}
+        <h1 clasName="carrito-text">
+          Total: ${" "}
           {cart.reduce(
-            (previousValue, currentValue) => previousValue + currentValue.price,
+            (previousValue, pizza) => previousValue + pizza.price,
             0
           )}
         </h1>

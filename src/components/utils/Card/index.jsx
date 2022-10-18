@@ -9,13 +9,11 @@ import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Button } from "react-bootstrap";
 import { DataContext } from "../../../context/provider";
+import { dark } from "@mui/material/styles/createPalette";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -27,7 +25,6 @@ const ExpandMore = styled((props) => {
     duration: theme.transitions.duration.shortest,
   }),
 }));
-
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
 export default function CardPizza({ value }) {
@@ -42,12 +39,11 @@ export default function CardPizza({ value }) {
     const newCart = [...cart, product];
     setCart(newCart);
   };
-
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <CardHeader
+      <CardHeader 
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+          <Avatar sx={{ bgcolor: dark[200] }} aria-label="recipe">
             {value.name.charAt(0).toUpperCase()}
           </Avatar>
         }
@@ -78,17 +74,10 @@ export default function CardPizza({ value }) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        {/* <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton> */}
-        <Button onClick={() => haddlerSendNewProduct(value)}>
+        <Button class="btn btn-dark" onClick={() => haddlerSendNewProduct(value)}>
           {" "}
           Agregar al carrito{" "}
         </Button>
-
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
@@ -100,7 +89,7 @@ export default function CardPizza({ value }) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Method:</Typography>
+          <Typography paragraph>Descripción:</Typography>
           <Typography paragraph>{value.desc}</Typography>
         </CardContent>
       </Collapse>
